@@ -8,7 +8,7 @@ setup(
         # List your project's dependencies here, e.g.,
         # 'numpy',
         # 'pandas',
-        'apify',
+        'apify-client',
     ],
     entry_points={
         # If you have any scripts or command-line interfaces, define them here
