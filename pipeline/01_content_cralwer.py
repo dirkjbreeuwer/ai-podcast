@@ -1,7 +1,9 @@
 import os
+import json
+from dotenv import load_dotenv
 from modules.content_crawler.crawler import ContentCrawler
 from modules.url_list_manager.manager import URLListManager
-from dotenv import load_dotenv
+
 
 def save_articles_to_file(articles, filename="data/raw/articles.json"):
     """Append articles to a JSON file."""

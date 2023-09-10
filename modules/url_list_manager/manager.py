@@ -37,6 +37,6 @@ class URLListManager:
     def save_urls_to_file(self, file_path="data/raw/initial_urls.txt"):
         """Save URLs to a file."""
         with open(file_path, 'w') as file:
-            for url in self.urls:
+            for url in self.url_list:
                 file.write(url + '\n')
 
