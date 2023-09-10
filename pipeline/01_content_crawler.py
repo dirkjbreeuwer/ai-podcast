@@ -1,12 +1,7 @@
-# pipeline/01_content_crawler.py
-
-import json
 import os
 from modules.content_crawler.crawler import ContentCrawler
 from modules.url_list_manager.manager import URLListManager
-
-import json
-import os
+from dotenv import load_dotenv
 
 def save_articles_to_file(articles, filename="data/raw/articles.json"):
     """Append articles to a JSON file."""
@@ -28,20 +23,18 @@ def save_articles_to_file(articles, filename="data/raw/articles.json"):
         json.dump(existing_articles, file, indent=4)
 
 def main():
-    # Load API key from the configuration file
-    with open('config/api_config.json', 'r') as file:
-        config = json.load(file)
-        API_KEY = config["APIFY_API_KEY"]
+    # Load environment variables from .env file
+    load_dotenv()
 
-# Initialize the URLListManager
+    # Retrieve API key from environment variables
+    API_KEY = os.getenv("APIFY_API_KEY")
+
+    # Initialize the URLListManager
     url_manager = URLListManager('data/raw/initial_urls.txt')  # Assuming this is the path where the URLs are stored
     urls = url_manager.load_urls_from_file()
 
-
     # Initialize and run the ContentCrawler
     crawler = ContentCrawler(API_KEY)
-    #print(urls)
-
     articles = crawler.extract_articles(urls)
 
     # Save articles to a file
